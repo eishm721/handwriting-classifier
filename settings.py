@@ -1,11 +1,16 @@
-# Canvas settings
-WHITE = 255
-BIG_WIDTH = 560
-PIXEL_SIZE = 28
-THICKNESS = BIG_WIDTH // PIXEL_SIZE
-assert BIG_WIDTH % PIXEL_SIZE == 0, "Canvas width must be a multiple of pixel size (default 28). Fix in settings.py"
+NUM_LETTERS = 26
 
-# Key codes
+# Colors
+WHITE_COLOR = 255
+BLACK_COLOR = 0
+
+# Canvas size settings - ONLY EDIT BIG_WIDTH
+BIG_WIDTH = 420
+COMPRESSED_WIDTH = 28
+PIXEL_SIZE = BIG_WIDTH // COMPRESSED_WIDTH
+
+# Key codes for OpenCV
 ESC_KEY = 27
 SPACE_KEY = 32
 Q_KEY = 113
+E_KEY = 101
