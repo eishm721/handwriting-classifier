@@ -1,0 +1,6 @@
+emnist
+numpy
+matplotlib 
+scikit-learn
+Keras
+Pillow
