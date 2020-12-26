@@ -106,6 +106,7 @@ def main():
         elif key == SPACE_KEY:
             # run neural network on current canvas 
             predictions = c.predict(canvas.getResizedImg())[:2]
+            print()
             [print('{:15} Confidence: {:.5f}'.format(letter, round(prob, 5))) for letter, prob in predictions]
             print()
     cv2.destroyAllWindows()

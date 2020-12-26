@@ -10,9 +10,9 @@ class HandwritingClassifier:
     """
     Classifier that uses pre-trained CNN to predict handwritten characters
     """
-    def __init__(self, filepath='./saved_model'):
+    def __init__(self, filepath='./model_v2'):
         assert os.path.exists(filepath), "Run trainModel.py to train CNN before testing"
-        self.model = load_model('./saved_model')
+        self.model = load_model(filepath)
 
     def loadTestData(self, category='letters'):
         """
@@ -28,7 +28,7 @@ class HandwritingClassifier:
         """
         x_test, y_test = self.loadTestData()
         loss, accuracy = self.model.evaluate(x_test, y_test, verbose=0) 
-        print("Loss: {:.3f}%".format(loss))
+        print("Loss: {:.3f}".format(loss))
         print("Accuracy: {:.3f}%".format(accuracy*100))
 
     def predict(self, image):
@@ -50,8 +50,9 @@ class HandwritingClassifier:
         return letterProbs
 
      
-
-        
+if __name__ == '__main__':
+    c = HandwritingClassifier('./mini_dataset')
+    c.evaluatePerformance()
 
 
 

@@ -1,17 +1,14 @@
 import emnist
 import numpy as np
 from keras.models import Sequential, save_model
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.utils import to_categorical
 from settings import *
+from PIL import Image
 
-# tryLater:
-    # different layers
-    # different optimizers  (SGD vs 'adam')
-# 4-5 epochs is fine for judging overall accuracy
-# https://www.pyimagesearch.com/2020/03/09/grad-cam-visualize-class-activation-maps-with-keras-tensorflow-and-deep-learning/
-# add image of GUI, class activation maps  to githubv
+from keras.preprocessing.image import ImageDataGenerator
+
 
 def reformat(images, labels):
     """ 
@@ -30,23 +27,32 @@ def loadTrainData(category='letters'):
     format appropriately
     """
     trainImages, trainLabels = emnist.extract_training_samples(category)
+
+    trainImages = trainImages[:100]
+    trainLabels = trainLabels[:100]
+
     return reformat(trainImages, trainLabels)
+
+    
     
 
 def defineModel():
     """
     Define layered convolutional neural network for handwriting classification.
+    
+    784-[32C3-64C3]-512-27 w/ 50% dropout w/out bias
     """
     model = Sequential()
-    model.add(Convolution2D(32, (3, 3), activation='relu', input_shape=(COMPRESSED_WIDTH, COMPRESSED_WIDTH, 1), data_format='channels_last'))
-    model.add(Convolution2D(32, (3, 3), activation='relu', data_format='channels_last'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(0.25))
-    model.add(Convolution2D(64, (3, 3), use_bias=False)) 
-    model.add(MaxPooling2D(pool_size=(2,2))) 
-    model.add(Dropout(0.25))  
+
+    # feature extraction
+    model.add(Convolution2D(32, 3, use_bias=False, padding='same', activation='relu', input_shape=(COMPRESSED_WIDTH, COMPRESSED_WIDTH, 1), data_format='channels_last'))
+    model.add(MaxPooling2D())
+    model.add(Convolution2D(64, 3, use_bias=False, padding='same', activation='relu'))
+    model.add(MaxPooling2D())
+
+    # classification
     model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
+    model.add(Dense(512, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(NUM_LETTERS+1, activation='softmax'))
 
@@ -67,4 +73,4 @@ def trainCNN(filepath='./saved_model', batchSize=32, numEpochs=10):
 
 
 if __name__ == '__main__':
-    trainCNN('./saved_model')
+    trainCNN('./mini_dataset')

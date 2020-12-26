@@ -1,4 +1,4 @@
 examplecode/
-saved_model
 __pycache__/
 .DS_Store
+oldmodels/
