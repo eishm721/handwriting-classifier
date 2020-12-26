@@ -4,7 +4,7 @@ import tensorflow as tf
 import testModel
 from settings import *
 
-class Drawer:
+class DrawingGUI:
     """
     GUI for drawing B&W images on openCV canvas and making predictions
     on handwriting
@@ -85,7 +85,7 @@ def main():
     Main function to handle OpenCV windows and neural engine
     """
     # link openCV canvas with drawing GUI callback
-    canvas = Drawer()
+    canvas = DrawingGUI()
     cv2.namedWindow('imageDetector')
     cv2.setMouseCallback('imageDetector', canvas.lineDrawing)
 
@@ -106,7 +106,7 @@ def main():
         elif key == SPACE_KEY:
             # run neural network on current canvas 
             predictions = c.predict(canvas.getResizedImg())[:2]
-            [print('{:15} Confidence: {}'.format(letter, round(prob, 5))) for letter, prob in predictions]
+            [print('{:15} Confidence: {:.5f}'.format(letter, round(prob, 5))) for letter, prob in predictions]
             print()
     cv2.destroyAllWindows()
 

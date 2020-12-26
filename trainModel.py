@@ -4,13 +4,14 @@ from keras.models import Sequential, save_model
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.utils import to_categorical
-from keras.optimizers import SGD
 from settings import *
 
 # tryLater:
     # different layers
     # different optimizers  (SGD vs 'adam')
 # 4-5 epochs is fine for judging overall accuracy
+# https://www.pyimagesearch.com/2020/03/09/grad-cam-visualize-class-activation-maps-with-keras-tensorflow-and-deep-learning/
+# add image of GUI, class activation maps  to githubv
 
 def reformat(images, labels):
     """ 
@@ -41,14 +42,16 @@ def defineModel():
     model.add(Convolution2D(32, (3, 3), activation='relu', data_format='channels_last'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Dropout(0.25))
+    model.add(Convolution2D(64, (3, 3), use_bias=False)) # add
+    model.add(MaxPooling2D(pool_size=(2,2))) # add
+    model.add(Dropout(0.25))  #added
     model.add(Flatten())
     model.add(Dense(128, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(NUM_LETTERS+1, activation='softmax'))
 
-    # compile model
-    opt = SGD(lr=0.01, momentum=0.9)
-    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
+    # compile model with 'adam' optimizer
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     return model
 
 
@@ -64,4 +67,4 @@ def trainCNN(filepath='./saved_model', batchSize=32, numEpochs=10):
 
 
 if __name__ == '__main__':
-    trainCNN()
+    trainCNN('./saved_model')
