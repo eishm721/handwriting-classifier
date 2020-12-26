@@ -5,11 +5,11 @@ I have developed an 8-layered CNN architecture using Keras/Tensorflow for classi
 
 Framework is developed in Python. Initial steps were designing a GUI using OpenCV/Tkinter/Pillow for handing real-time drawing canvas with callbacks, mouse/keyboard controls, image processing for resizing canvas to 28x28. Next, I scraped EMNIST/MNIST datasets for labeled handwriting data. Next, I designed and built a 8-layered CNN using Keras/Tensorflow with adam optimization. Lastly, I intergrated the neural engine with the GUI for a unified app.
 
-Model Architecture:  
+### Model Architecture:  
 ConvNet -> Pool -> ConvNet -> Pool -> (Flatten) -> Dense -> (Dropout) -> Softmax  
 28x28-[32C3-P2-64C3-P2]-F-512-27 w/ 50% dropout w/out bias
 
-Hyperparameters Tuned
+Hyperparameters Tuned:
 - Convolution Subsambling Pairs: 2
 - Feature Maps: 32, 64
 - Dense Layer: 512
