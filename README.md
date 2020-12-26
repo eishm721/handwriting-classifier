@@ -24,10 +24,12 @@ Hyperparameters Tuned:
 
 ### Usage
     pip install -r requirements.txt
+    python3 trainModel.py
     python3 draw.py
     
-    Instructions for using GUI are displayed on launch in terminal. Output for neural engine appears in CLI with top 2 predicted characters and a confidence rating from 0 to 1
-
+    Train model on first run.  
+    Instructions for using GUI are displayed on launch interminal.   
+    Output for neural engine appears in CLI with top 2 predicted characters and a confidence rating from 0 to 1.  
     
 ### Libraries Used:
 - Keras/TensorFlow - Building neural network using custom engine

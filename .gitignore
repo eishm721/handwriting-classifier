@@ -2,3 +2,4 @@ examplecode/
 __pycache__/
 .DS_Store
 oldmodels/
+model_v2
