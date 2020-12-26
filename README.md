@@ -1,12 +1,19 @@
-# ImageNet
+# HandwritingClassifier
 
 This is a python application that uses convolutional neural networks (CNN) for analyzing handwriting in real time.
 I have developed an 8-layered CNN architecture using Keras/Tensorflow for classifying English characters based on 28x28 hand-drawn images. I have built a real-time GUI using OpenCV/TKinter/Pillow to create a Microsoft Paint-like drawing interface based on mouse controls with a real-time neural engine for analysis. I also have a scraper for MNIST/EMINST datasets for 150k+ data points. We have trained the model on 150k characters resulting in 92+% accuracy.
 
 Framework is developed in Python. Initial steps were designing a GUI using OpenCV/Tkinter/Pillow for handing real-time drawing canvas with callbacks, mouse/keyboard controls, image processing for resizing canvas to 28x28. Next, I scraped EMNIST/MNIST datasets for labeled handwriting data. Next, I designed and built a 8-layered CNN using Keras/Tensorflow with adam optimization. Lastly, I intergrated the neural engine with the GUI for a unified app.
 
-Model Architecture:
-ConvNet -> ConvNet -> Pool -> (Dropout) -> ConvNet -> Pool -> (Dropout) -> (Flatten) -> Dense -> (Dropout) -> Softmax
+Model Architecture:  
+ConvNet -> Pool -> ConvNet -> Pool -> (Flatten) -> Dense -> (Dropout) -> Softmax  
+28x28-[32C3-P2-64C3-P2]-F-512-27 w/ 50% dropout w/out bias
+
+Hyperparameters Tuned
+- Convolution Subsambling Pairs: 2
+- Feature Maps: 32, 64
+- Dense Layer: 512
+- Dropout Layer: 0.5
 
 ### Features:
 - 8-layer CNN training on 150,000+ 28x28 character images
