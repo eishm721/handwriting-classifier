@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 oldmodels/
 model_v2
+mini_dataset
+

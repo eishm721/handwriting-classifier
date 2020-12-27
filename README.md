@@ -9,7 +9,7 @@ Framework is developed in Python. Initial steps were designing a GUI using OpenC
 
 ### Model Architecture:  
 ConvNet -> Pool -> ConvNet -> Pool -> (Flatten) -> Dense -> (Dropout) -> Softmax  
-28x28-[32C3-P2-64C3-P2]-F-512-27 w/ 50% dropout w/out bias
+28x28-[32C3-MP2-64C3-MP2]-512-27 w/ 50% dropout w/out bias
 
 Hyperparameters Tuned:
 - Convolution Subsambling Pairs: 2

@@ -28,8 +28,8 @@ def loadTrainData(category='letters'):
     """
     trainImages, trainLabels = emnist.extract_training_samples(category)
 
-    trainImages = trainImages[:100]
-    trainLabels = trainLabels[:100]
+    trainImages = trainImages[:1000]
+    trainLabels = trainLabels[:1000]
 
     return reformat(trainImages, trainLabels)
 
@@ -40,7 +40,7 @@ def defineModel():
     """
     Define layered convolutional neural network for handwriting classification.
     
-    784-[32C3-64C3]-512-27 w/ 50% dropout w/out bias
+    784-[32C3-MP2-64C3-MP2]-512-27 w/ 50% dropout w/out bias
     """
     model = Sequential()
 
@@ -49,9 +49,9 @@ def defineModel():
     model.add(MaxPooling2D())
     model.add(Convolution2D(64, 3, use_bias=False, padding='same', activation='relu'))
     model.add(MaxPooling2D())
-
-    # classification
     model.add(Flatten())
+    
+    # classification
     model.add(Dense(512, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(NUM_LETTERS+1, activation='softmax'))
