@@ -33,8 +33,6 @@ def loadTrainData(category='letters'):
 
     return reformat(trainImages, trainLabels)
 
-    
-    
 
 def defineModel():
     """
